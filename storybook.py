@@ -1,4 +1,5 @@
 import os
+import time
 
 import streamlit as st
 from openai import OpenAI
@@ -47,7 +48,7 @@ def image_gen(prompt):
 #cover prompt generator method
 def cover_gen(prompt):
   system_prompt = """
-  You will be given a children story book. Generate a prompt for a cover art 
+  Generate a prompt for a cover art 
   that is suitable and shows off the story themes. The prompt will be sent to dall-e-2. 
   """
   response = client.chat.completions.create(
@@ -83,6 +84,7 @@ if st.button("Genarate Storybook"):
     story = story_gen(prompt)
     cover = cover_gen(story)
     image = image_gen(cover)
+    time.sleep(5) 
     st.balloons()
     st.snow()
     st.image(image)
